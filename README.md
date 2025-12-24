@@ -1,3 +1,5 @@
+<div align="center">
+
 # 🔐 Cloudflare 2FA Generator
 
 **基于 Cloudflare Workers 的 2FA/TOTP 验证码生成器**  
@@ -74,44 +76,3 @@ CREATE TABLE IF NOT EXISTS totp_logs (
 CREATE INDEX IF NOT EXISTS idx_saved_accounts_user_id ON saved_accounts(user_id);
 CREATE INDEX IF NOT EXISTS idx_totp_logs_user_id ON totp_logs(user_id);
 CREATE INDEX IF NOT EXISTS idx_totp_logs_timestamp ON totp_logs(timestamp DESC);
-步骤 4️⃣：绑定数据库（10秒）
-回到你的 Worker → Settings → Variables
-找到 D1 Database Bindings → 点击 Add binding
-填写：
-Variable name: DB
-D1 database: 选择 2fa-database
-点击 Save
-✅ 完成！
-访问你的 Worker 地址（如 https://2fa-generator.your-subdomain.workers.dev）开始使用！
-
-📱 使用说明
-🎯 游客模式（无需登录）
-🔐 账户模式（云端同步）
-💾 备份恢复
-🔔 可选：Telegram 推送（1分钟配置）
-点击展开配置步骤
-❓ 常见问题
-Q: 为什么显示"数据库未连接"？
-Q: WebDAV 连接失败？
-Q: 如何迁移到新设备？
-🛠️ 技术栈
-前端	后端	存储	工具	加密
-HTML/CSS/JS	Cloudflare Workers	D1 SQLite	jsQR	SHA-256
-📄 开源协议
-本项目采用 MIT License 开源协议
-
-🙏 鸣谢
-Cloudflare - 提供边缘计算平台
-jsQR - 二维码识别库
-RFC 6238 - TOTP 算法标准
-⚠️ 免责声明
-本项目基于 Cloudflare Workers 部署，数据存储在你的 D1 数据库中
-请妥善保管账户密码和保险库密码
-敏感数据均采用 SHA-256 加密，但仍建议定期备份
-开发者不对因使用本项目导致的任何问题负责
-💡 使用过程中遇到问题？
-📮 提交 Issue | ⭐ 给个 Star
-
-Made with ❤️ by soga11
-
-```
