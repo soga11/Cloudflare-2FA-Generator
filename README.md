@@ -148,28 +148,3 @@ CREATE TABLE IF NOT EXISTS totp_logs (
 CREATE INDEX IF NOT EXISTS idx_saved_accounts_user_id ON saved_accounts(user_id);
 CREATE INDEX IF NOT EXISTS idx_totp_logs_user_id ON totp_logs(user_id);
 CREATE INDEX IF NOT EXISTS idx_totp_logs_timestamp ON totp_logs(timestamp DESC);
-步骤 4：绑定数据库（20秒）
-回到你的 Worker 页面
-点击 设置 选项卡
-找到 变量 → 滚动到 D1 数据库绑定
-点击 添加绑定
-填写：
-变量名称：DB
-D1 数据库：选择 2fa-database
-点击 部署
-🎉 完成！
-访问你的 Worker 域名：
-
-https://你的worker名称.你的账号.workers.dev
-⏱️ 总耗时：约 80 秒
-
-📲 可选：启用 Telegram 推送（1分钟）
-点击展开配置步骤
-💡 快速使用
-🔰 游客模式（无需注册）
-打开网站
-输入密钥或扫描二维码
-自动生成验证码并复制
-粘贴使用
-🔐 账号模式（完整功能）
-点击展开详细步骤
