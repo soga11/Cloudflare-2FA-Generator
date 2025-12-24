@@ -1,39 +1,62 @@
-<div align="center">
+🚀 Cloudflare 2FA Generator — 快速安装指南（新手版）
 
-# 🔐 Cloudflare 2FA Generator
+一个部署在 Cloudflare Workers 上的 2FA / TOTP 验证码生成器
+无服务器 · 免费 · 云端同步
 
-**基于 Cloudflare Workers 的双因素验证码生成器**
+⏱️ 安装前准备（30 秒）
 
-✨ 一键部署 | 🔒 端到端加密 | ☁️ 云端同步 | 📱 多设备支持
+你需要：
 
-[![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/soga11/Cloudflare-2FA-Generator)
+一个 Cloudflare 账号
 
-</div>
+能访问 Cloudflare Dashboard
 
----
+🧩 第 1 步：创建 Worker（1 分钟）
 
-## 🚀 三步快速部署（3分钟完成）
+登录 👉 https://dash.cloudflare.com
 
-### 第一步：创建 Worker
+左侧进入 Workers & Pages
 
-1. 登录 [Cloudflare Dashboard](https://dash.cloudflare.com) → **Workers & Pages**
-2. 点击 **Create Application** → **Create Worker**
-3. 命名为 `2fa-generator` → 点击 **Deploy**
-4. 点击 **Edit Code**，删除所有代码，粘贴 [`worker.js`](./worker.js) 的内容
-5. 点击 **Save and Deploy**
+点击 Create Application
 
----
+选择 Create Worker
 
-### 第二步：创建数据库
+Worker 名称随便填（如 2fa-generator）
 
-1. 返回 Dashboard → 左侧 **Storage & Databases** → **D1 SQL Database**
-2. 点击 **Create** → 命名为 `2fa-database` → **Create**
-3. 进入数据库 → 点击 **Console** 标签
-4. 复制下面的 SQL 代码，粘贴到控制台，点击 **Execute**
+点击 Deploy
 
-```sql
+进入编辑器
+
+把 worker.js 的完整代码全部粘进去
+
+点击 Save and Deploy
+
+✅ 到这里，Worker 已创建完成
+
+🗄️ 第 2 步：创建数据库（1 分钟）
+
+回到 Cloudflare Dashboard
+
+左侧点击 Storage & Databases
+
+进入 D1 SQL Database
+
+点击 Create
+
+数据库名称填写：
+
+2fa-database
+
+
+创建完成后，点击进入数据库
+
+打开顶部的 Console
+
+复制并执行下面这段 SQL（全部一起执行）
+
+📄 数据库初始化 SQL（直接复制）
 -- 用户表
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   username TEXT UNIQUE NOT NULL,
   password_hash TEXT NOT NULL,
@@ -41,19 +64,18 @@ CREATE TABLE users (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- 账户表
-CREATE TABLE saved_accounts (
+-- 保存的账户
+CREATE TABLE IF NOT EXISTS saved_accounts (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   user_id INTEGER NOT NULL,
   account_name TEXT NOT NULL,
   encrypted_secret TEXT NOT NULL,
   issuer TEXT,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- 日志表
-CREATE TABLE totp_logs (
+-- 验证码日志
+CREATE TABLE IF NOT EXISTS totp_logs (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   user_id TEXT NOT NULL,
   secret TEXT NOT NULL,
@@ -62,18 +84,71 @@ CREATE TABLE totp_logs (
   timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- 索引
-CREATE INDEX idx_saved_accounts_user_id ON saved_accounts(user_id);
-CREATE INDEX idx_totp_logs_user_id ON totp_logs(user_id);
-CREATE INDEX idx_totp_logs_timestamp ON totp_logs(timestamp DESC);
-第三步：绑定数据库
-回到你的 Worker → Settings → Variables
-找到 D1 Database Bindings → 点击 Add binding
-填写：
-Variable name: DB（必须大写）
-D1 database: 选择 2fa-database
-点击 Save
-✅ 部署完成！
-访问你的 Worker 地址开始使用：
+-- 索引优化
+CREATE INDEX IF NOT EXISTS idx_saved_accounts_user_id
+ON saved_accounts(user_id);
 
-https://2fa-generator.你的用户名.workers.dev
+CREATE INDEX IF NOT EXISTS idx_totp_logs_user_id
+ON totp_logs(user_id);
+
+CREATE INDEX IF NOT EXISTS idx_totp_logs_timestamp
+ON totp_logs(timestamp DESC);
+
+
+✅ 如果没有报错，数据库初始化完成
+
+🔗 第 3 步：绑定数据库到 Worker（30 秒）
+
+打开你的 Worker
+
+进入 Settings → Variables
+
+找到 D1 Database Bindings
+
+点击 Add binding
+
+填写：
+
+项目	内容
+Variable name	DB
+D1 database	2fa-database
+
+点击 Save
+
+再点一次 Save and Deploy
+
+✅ 第 4 步：访问并使用
+
+打开你的 Worker 地址，例如：
+
+https://2fa-generator.your-name.workers.dev
+
+
+如果页面能正常打开，说明部署成功 🎉
+
+❓ 常见问题（给小白看的）
+Q：页面提示「数据库未连接」？
+
+请检查：
+
+绑定名是否是 大写 DB
+
+数据库是否选择的是 2fa-database
+
+保存后等 5–10 秒再刷新
+
+Q：这是免费的吗？
+
+是的：
+
+Cloudflare Workers 免费额度够个人使用
+
+D1 数据库也有免费额度
+
+Q：数据安全吗？
+
+密码使用 SHA-256
+
+数据只存在 你自己的 Cloudflare 账号
+
+开发者无法访问你的数据
