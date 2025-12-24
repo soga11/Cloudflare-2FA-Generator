@@ -145,8 +145,6 @@ CREATE INDEX IF NOT EXISTS idx_saved_accounts_user_id ON saved_accounts(user_id)
 CREATE INDEX IF NOT EXISTS idx_totp_logs_user_id ON totp_logs(user_id);
 CREATE INDEX IF NOT EXISTS idx_totp_logs_timestamp ON totp_logs(timestamp DESC);
 ```
-
-
 步骤 4：绑定数据库（20秒）
 回到你的 Worker 页面
 点击 设置 选项卡
@@ -156,3 +154,5 @@ CREATE INDEX IF NOT EXISTS idx_totp_logs_timestamp ON totp_logs(timestamp DESC);
 变量名称：DB
 D1 数据库：选择 2fa-database
 点击 部署
+🎉 完成！
+访问你的 Worker 域名：
