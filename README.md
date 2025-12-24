@@ -108,12 +108,13 @@
 3. 数据库名称输入：`2fa-database`
 4. 点击 **创建**
 5. 进入数据库 → 点击 **控制台**
-6. 复制下面的 SQL 代码，粘贴到控制台并执行：
+6. 复制 [`schema.sql`](https://github.com/soga11/Cloudflare-2FA-Generator/blob/main/schema.sql) 的内容，粘贴到控制台并执行
 
 <details>
-<summary><b>点击展开 SQL 代码</b></summary>
+<summary><b>💡 点击查看 SQL 代码（如果 schema.sql 打不开）</b></summary>
 
 ```sql
+-- 用户表
 CREATE TABLE IF NOT EXISTS users (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   username TEXT UNIQUE NOT NULL,
@@ -122,6 +123,7 @@ CREATE TABLE IF NOT EXISTS users (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- 保存的账号表
 CREATE TABLE IF NOT EXISTS saved_accounts (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   user_id INTEGER NOT NULL,
@@ -132,6 +134,7 @@ CREATE TABLE IF NOT EXISTS saved_accounts (
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
+-- TOTP 日志表
 CREATE TABLE IF NOT EXISTS totp_logs (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   user_id TEXT NOT NULL,
@@ -141,13 +144,10 @@ CREATE TABLE IF NOT EXISTS totp_logs (
   timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- 创建索引
 CREATE INDEX IF NOT EXISTS idx_saved_accounts_user_id ON saved_accounts(user_id);
 CREATE INDEX IF NOT EXISTS idx_totp_logs_user_id ON totp_logs(user_id);
 CREATE INDEX IF NOT EXISTS idx_totp_logs_timestamp ON totp_logs(timestamp DESC);
-
-```
-<details>
-
 步骤 4：绑定数据库（20秒）
 回到你的 Worker 页面
 点击 设置 选项卡
@@ -160,6 +160,8 @@ D1 数据库：选择 2fa-database
 🎉 完成！
 访问你的 Worker 域名：
 
+https://你的worker名称.你的账号.workers.dev
+⏱️ 总耗时：约 80 秒
 
 📲 可选：启用 Telegram 推送（1分钟）
 点击展开配置步骤
@@ -170,68 +172,4 @@ D1 数据库：选择 2fa-database
 自动生成验证码并复制
 粘贴使用
 🔐 账号模式（完整功能）
-注册账号 - 右上角点击"登录/注册"，设置用户名和密码（至少 6 位）
-设置保险库 - 进入"常用账号"，设置保险库密码（至少 8 位）
-添加账号 - 点击"➕ 添加账号"，填写账号名称和密钥
-备份数据 - 点击"💾 备份管理"，选择备份方式：
-📄 本地备份
-点击 导出 JSON 或 导出 TXT
-妥善保管文件（包含明文密钥）
-需要恢复时点击 选择文件导入
-☁️ WebDAV 云备份
-坚果云配置示例：
-
-服务器地址: https://dav.jianguoyun.com/dav/
-账户: your@email.com
-密码: [应用密码]  ← 坚果云网页版 → 安全选项 → 添加应用
-文件夹: 2FA_Backup
-操作：
-
-填写配置 → 点击 测试连接
-连接成功 → 点击 上传到 WebDAV
-需要恢复 → 点击 从 WebDAV 恢复
-❓ 常见问题
-Q: 完全免费吗？有使用限制吗？
-A: 完全免费！
-
-✅ Cloudflare Workers 每天 100,000 次请求免费
-✅ D1 数据库每天 100,000 次读写免费
-✅ 个人使用完全够用，无需付费
-Q: 数据存在哪里？安全吗？
-Q: 忘记密码怎么办？
-Q: 相机扫码不工作？
-Q: WebDAV 连接失败？
-Q: Telegram 推送不工作？
-Q: 可以多设备同步吗？
-🛠️ 技术栈
-🎨 前端	⚡ 后端	🗄️ 数据库	📷 二维码	🔐 加密
-原生 JS	Workers	D1 SQLite	jsQR	SHA-256
-📄 开源协议
-本项目采用 MIT License 开源。
-
-你可以：
-
-✅ 自由使用、修改、分发
-✅ 用于个人或商业项目
-🙏 致谢
-Cloudflare - 强大的边缘计算平台
-jsQR - 优秀的二维码识别库
-RFC 6238 - TOTP 标准协议
-🔗 相关链接
-🐛 问题反馈
-💬 讨论区
-📖 Cloudflare Workers 文档
-⚠️ 免责声明
-本项目仅供学习和个人使用。请妥善保管 2FA 密钥和备份文件。
-
-安全建议：
-
-🔐 使用强密码保护账号
-💾 定期导出备份到安全位置
-🚫 不要在公共设备上使用
-📲 建议启用 Telegram 推送作为额外备份
-⭐ 如果这个项目对你有帮助，请给个 Star！
-
-Star History Chart
-
-Made with ❤️ by soga11
+点击展开详细步骤
