@@ -69,6 +69,7 @@ CREATE INDEX idx_totp_logs_user_id ON totp_logs(user_id);
 CREATE INDEX idx_totp_logs_timestamp ON totp_logs(timestamp DESC);
 
 
+
 ---
 
 ### 第三步：绑定数据库到 Worker
