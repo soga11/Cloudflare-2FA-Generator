@@ -1,5 +1,3 @@
-<div align="center">
-
 # 🔐 Cloudflare 2FA Generator
 
 **基于 Cloudflare Workers 的 2FA/TOTP 验证码生成器**  
