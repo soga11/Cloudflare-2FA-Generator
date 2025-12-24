@@ -145,3 +145,23 @@ TELEGRAM_CHAT_ID	Chat ID
 
 勾选 Encrypt
 
+❓ 常见问题
+数据库未连接？
+绑定名必须是 DB
+
+数据库必须是 2fa-database
+
+保存后等待 10 秒
+
+忘记保险库密码？
+❌ 无法找回
+✅ 只能通过备份恢复
+
+🛠️ 技术栈
+前端	后端	存储	加密
+HTML / JS	Workers	D1	SHA-256
+
+📄 License
+MIT License
+
+Made with ❤️ by soga11
