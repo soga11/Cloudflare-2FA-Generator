@@ -125,3 +125,21 @@ Q: 忘记保险库密码？
 
 Q: 如何备份数据？
 → 点击「导出为 JSON」或配置 WebDAV 自动备份
+
+🛠️ 技术栈
+前端: HTML + CSS + JavaScript
+后端: Cloudflare Workers（Serverless）
+数据库: Cloudflare D1（SQLite）
+加密: SHA-256 + Web Crypto API
+QR 识别: jsQR
+📄 开源协议
+MIT License © 2024 soga11
+
+🌟 支持项目
+如果这个项目对你有帮助，请给个 ⭐ Star！
+
+遇到问题？提交 Issue
+
+Made with ❤️ by soga11
+
+```
