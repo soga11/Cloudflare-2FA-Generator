@@ -1,3 +1,5 @@
+<div align="center">
+
 # 🔐 Cloudflare 2FA Generator
 
 **基于 Cloudflare Workers 的 2FA/TOTP 验证码生成器**  
@@ -74,8 +76,6 @@ CREATE TABLE IF NOT EXISTS totp_logs (
 CREATE INDEX IF NOT EXISTS idx_saved_accounts_user_id ON saved_accounts(user_id);
 CREATE INDEX IF NOT EXISTS idx_totp_logs_user_id ON totp_logs(user_id);
 CREATE INDEX IF NOT EXISTS idx_totp_logs_timestamp ON totp_logs(timestamp DESC);
-
-
 步骤 4️⃣：绑定数据库（10秒）
 回到你的 Worker → Settings → Variables
 找到 D1 Database Bindings → 点击 Add binding
@@ -83,3 +83,5 @@ CREATE INDEX IF NOT EXISTS idx_totp_logs_timestamp ON totp_logs(timestamp DESC);
 Variable name: DB
 D1 database: 选择 2fa-database
 点击 Save
+✅ 完成！
+访问你的 Worker 地址（如 https://2fa-generator.your-subdomain.workers.dev）开始使用！
