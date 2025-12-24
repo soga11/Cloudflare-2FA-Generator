@@ -77,7 +77,7 @@ CREATE INDEX idx_totp_logs_user_id ON totp_logs(user_id);
 CREATE INDEX idx_totp_logs_timestamp ON totp_logs(timestamp DESC);
 ```
 
-第三步：绑定数据库到 Worker
+### 第三步：绑定数据库到 Worker
 进入 Workers & Pages
 
 点击你的 Worker：2fa-generator
@@ -106,7 +106,7 @@ cpp
 https://2fa-generator.你的用户名.workers.dev
 页面能正常打开即部署成功 🎉
 
-📱 核心功能
+### 📱 核心功能
 功能	说明
 🔑 实时 TOTP	6 位动态验证码
 📸 扫码识别	摄像头 / 截图 / 图片
@@ -115,7 +115,7 @@ https://2fa-generator.你的用户名.workers.dev
 ☁️ 云端同步	多设备同步（需登录）
 ⚡ 全球加速	Cloudflare 边缘节点
 
-🎯 使用指南
+### 🎯 使用指南
 游客模式（无需登录）
 打开页面
 
@@ -134,7 +134,7 @@ https://2fa-generator.你的用户名.workers.dev
 
 多设备自动同步
 
-🔔 可选：Telegram 推送
+### 🔔 可选：Telegram 推送
 1️⃣ 创建机器人
 搜索 @BotFather
 
