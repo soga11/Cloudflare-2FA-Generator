@@ -66,6 +66,9 @@ CREATE TABLE totp_logs (
 CREATE INDEX idx_saved_accounts_user_id ON saved_accounts(user_id);
 CREATE INDEX idx_totp_logs_user_id ON totp_logs(user_id);
 CREATE INDEX idx_totp_logs_timestamp ON totp_logs(timestamp DESC);
+
+```
+
 第三步：绑定数据库
 回到你的 Worker → Settings → Variables
 找到 D1 Database Bindings → 点击 Add binding
