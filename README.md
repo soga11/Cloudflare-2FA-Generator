@@ -76,11 +76,6 @@ CREATE TABLE IF NOT EXISTS totp_logs (
 CREATE INDEX IF NOT EXISTS idx_saved_accounts_user_id ON saved_accounts(user_id);
 CREATE INDEX IF NOT EXISTS idx_totp_logs_user_id ON totp_logs(user_id);
 CREATE INDEX IF NOT EXISTS idx_totp_logs_timestamp ON totp_logs(timestamp DESC);
-
-- 第 2 行：` ``` `（**三个反引号**，结束 SQL 代码块）
-- 第 3 行：**空行**
-- 第 4 行：`</details>`（**关闭折叠标签**）
-
 步骤 4️⃣：绑定数据库（10秒）
 回到你的 Worker → Settings → Variables
 找到 D1 Database Bindings → 点击 Add binding
