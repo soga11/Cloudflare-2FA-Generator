@@ -112,3 +112,16 @@ TELEGRAM_BOT_TOKEN = 你的 Bot Token
 TELEGRAM_CHAT_ID = 你的 Chat ID
 点击 Encrypt → Save and Deploy
 推送效果：每次生成验证码时，自动发送到你的 Telegram
+
+❓ 常见问题
+Q: 显示"数据库未连接"？
+→ 检查 Worker Settings → Variables → D1 绑定名称是否为 DB（大写）
+
+Q: WebDAV 连接失败？
+→ 确保 URL 以 / 结尾，使用应用专用密码（坚果云需要在「安全选项」生成）
+
+Q: 忘记保险库密码？
+→ 无法找回（SHA-256 加密），建议用备份文件重新导入
+
+Q: 如何备份数据？
+→ 点击「导出为 JSON」或配置 WebDAV 自动备份
