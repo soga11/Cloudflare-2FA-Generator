@@ -150,11 +150,13 @@ https://2fa-generator.你的用户名.workers.dev
 获取数字 ID
 
 3️⃣ 配置环境变量
-名称	值
-TELEGRAM_BOT_TOKEN	Bot Token
-TELEGRAM_CHAT_ID	Chat ID
+Worker → Settings → Variables → Add variable
 
+名称	值
+TELEGRAM_BOT_TOKEN	你的 Bot Token
+TELEGRAM_CHAT_ID	你的 Chat ID
 点击 Encrypt → Save and Deploy
+
 
 🛠 技术栈
 前端：HTML / CSS / JavaScript
